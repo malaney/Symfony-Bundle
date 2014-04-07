@@ -11,11 +11,12 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "symfony/framework-bundle": "~2.4",
+        "symfony/framework-bundle": "~2",
         "cron/cron": "1.0.*"
     },
     "require-dev": {
-        "phpunit/phpunit": "3.7.*@dev"
+        "phpunit/phpunit": "3.7.*@dev",
+        "doctrine/common": "*"
     },
     "autoload": {
         "psr-4" : {
