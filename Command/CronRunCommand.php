@@ -49,6 +49,7 @@ class CronRunCommand extends ContainerAwareCommand
         } else {
             $resolver = $this->getContainer()->get('cron.resolver');
         }
+        $resolver->setEnvironment($input->getArgument('env'));
         $cron->setResolver($resolver);
 
         $time = microtime(true);

@@ -36,6 +36,11 @@ class Resolver implements ResolverInterface
      */
     protected $phpExecutable;
 
+    /**
+     * @var string
+     */
+    protected $environment;
+
     public function __construct()
     {
         $finder = new PhpExecutableFinder();
@@ -79,10 +84,31 @@ class Resolver implements ResolverInterface
     protected function createJob(CronJob $dbJob)
     {
         $job = new ShellJob();
-        $job->setCommand($this->phpExecutable . ' app/console ' . $dbJob->getCommand(), $this->rootDir);
+        $job->setCommand($this->phpExecutable . ' app/console ' . $dbJob->getCommand() . ' --env=' . $this->getEnvironment(), $this->rootDir);
         $job->setSchedule(new CrontabSchedule($dbJob->getSchedule()));
         $job->raw = $dbJob;
 
         return $job;
+    }
+ 
+    /**
+     * Get environment.
+     *
+     * @return environment.
+     */
+    public function getEnvironment()
+    {
+        return $this->environment;
+    }
+ 
+    /**
+     * Set environment.
+     *
+     * @param environment the value to set.
+     */
+    public function setEnvironment($environment)
+    {
+        $this->environment = $environment;
+        return $this;
     }
 }
